@@ -1,0 +1,31 @@
+# All user agents are allowed to visit the website
+User-agent: *
+Disallow:
+
+# Disallow access to the following directories:
+Disallow: /admin/
+Disallow: /cgi-bin/
+Disallow: /tmp/
+Disallow: /private/
+
+# Allow specific files within directories that are disallowed:
+Allow: /admin/admin-ajax.php
+
+# Disallow crawling of search pages
+Disallow: /search
+
+# Block specific file types from being crawled:
+User-agent: *
+Disallow: /*.pdf$
+Disallow: /*.zip$
+Disallow: /*.rar$
+
+# Block specific bots from accessing the site:
+User-agent: AhrefsBot
+Disallow: /
+
+User-agent: SemrushBot
+Disallow: /
+
+# XML Sitemap location
+Sitemap: https://www.yaracabservices.com/sitemap.xml

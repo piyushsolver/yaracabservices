@@ -1,0 +1,703 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog - Mahadev Cab & Taxi Service</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        .blog-section {
+            padding: 80px 5%;
+            background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+        }
+
+        .blog-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .section-title {
+            font-size: 3rem;
+            color: #2c2c2c;
+            margin-bottom: 15px;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            width: 80px;
+            height: 4px;
+            background: #ffd700;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-radius: 2px;
+        }
+
+        .section-subtitle {
+            font-size: 1.2rem;
+            color: #666;
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+
+        .blog-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-bottom: 50px;
+        }
+
+        .blog-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .blog-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .blog-badge {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            background: #ffd700;
+            color: #2c2c2c;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 0.8rem;
+            z-index: 2;
+        }
+
+        .blog-image {
+            height: 220px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .blog-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .blog-card:hover .blog-image img {
+            transform: scale(1.1);
+        }
+
+        .blog-content {
+            padding: 25px;
+        }
+
+        .blog-meta {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 15px;
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        .blog-meta-item {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .blog-meta-item i {
+            color: #ffd700;
+        }
+
+        .blog-title {
+            font-size: 1.4rem;
+            color: #2c2c2c;
+            margin-bottom: 15px;
+            line-height: 1.4;
+            transition: color 0.3s ease;
+        }
+
+        .blog-card:hover .blog-title {
+            color: #ffd700;
+        }
+
+        .blog-excerpt {
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 20px;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .blog-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 20px;
+        }
+
+        .blog-tag {
+            background: #f8f9fa;
+            color: #666;
+            padding: 4px 12px;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            border: 1px solid #e0e0e0;
+            transition: all 0.3s ease;
+        }
+
+        .blog-tag:hover {
+            background: #ffd700;
+            color: #2c2c2c;
+            border-color: #ffd700;
+        }
+
+        .blog-actions {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .read-more {
+            background: #2c2c2c;
+            color: #ffd700;
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .read-more:hover {
+            background: #ffd700;
+            color: #2c2c2c;
+            transform: translateY(-2px);
+        }
+
+        .blog-stats {
+            display: flex;
+            gap: 15px;
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        .blog-stat {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .blog-stat i {
+            color: #ffd700;
+        }
+
+        .blog-cta {
+            background: linear-gradient(135deg, #2c2c2c, #1a1a1a);
+            border-radius: 20px;
+            padding: 50px;
+            text-align: center;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .blog-cta::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,215,0,0.1) 0%, transparent 70%);
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .cta-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .cta-title {
+            font-size: 2.2rem;
+            margin-bottom: 15px;
+            color: #ffd700;
+        }
+
+        .cta-text {
+            font-size: 1.1rem;
+            margin-bottom: 30px;
+            opacity: 0.9;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 1.6;
+        }
+
+        .subscribe-form {
+            display: flex;
+            gap: 15px;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        .subscribe-input {
+            flex: 1;
+            padding: 15px 20px;
+            border: none;
+            border-radius: 10px;
+            font-size: 1rem;
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            border: 1px solid rgba(255, 215, 0, 0.3);
+        }
+
+        .subscribe-input::placeholder {
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        .subscribe-input:focus {
+            outline: none;
+            border-color: #ffd700;
+            background: rgba(255, 255, 255, 0.15);
+            box-shadow: 0 0 20px rgba(255, 215, 0, 0.2);
+        }
+
+        .subscribe-btn {
+            background: #ffd700;
+            color: #2c2c2c;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 10px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .subscribe-btn:hover {
+            background: #ffed4e;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(255, 215, 0, 0.4);
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .section-title {
+                font-size: 2.2rem;
+            }
+            
+            .blog-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .blog-actions {
+                flex-direction: column;
+                gap: 15px;
+                align-items: flex-start;
+            }
+            
+            .subscribe-form {
+                flex-direction: column;
+            }
+            
+            .blog-cta {
+                padding: 30px 20px;
+            }
+            
+            .cta-title {
+                font-size: 1.8rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .section-title {
+                font-size: 1.8rem;
+            }
+            
+            .blog-content {
+                padding: 20px;
+            }
+            
+            .blog-meta {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 8px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Blog Section -->
+    <section class="blog-section">
+        <div class="blog-container">
+            <div class="section-header">
+                <h2 class="section-title">Travel Insights & Tips</h2>
+                <p class="section-subtitle">Discover helpful travel guides, safety tips, and insider knowledge for your next journey</p>
+            </div>
+
+            <div class="blog-grid">
+                <!-- Blog Post 1 -->
+                <article class="blog-card">
+                    <div class="blog-badge">Travel Tips</div>
+                    <div class="blog-image">
+                        <img src="https://images.unsplash.com/photo-1488646953014-85cb44e25828?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" alt="Road Trip Planning">
+                    </div>
+                    <div class="blog-content">
+                        <div class="blog-meta">
+                            <div class="blog-meta-item">
+                                <i class="far fa-calendar"></i>
+                                <span>March 15, 2024</span>
+                            </div>
+                            <div class="blog-meta-item">
+                                <i class="far fa-clock"></i>
+                                <span>5 min read</span>
+                            </div>
+                            <div class="blog-meta-item">
+                                <i class="far fa-user"></i>
+                                <span>By Admin</span>
+                            </div>
+                        </div>
+                        <h3 class="blog-title">10 Essential Tips for Planning the Perfect Road Trip</h3>
+                        <p class="blog-excerpt">Discover how to plan an unforgettable road trip with our expert tips on route planning, packing essentials, and making the most of your journey.</p>
+                        <div class="blog-tags">
+                            <span class="blog-tag">Road Trip</span>
+                            <span class="blog-tag">Planning</span>
+                            <span class="blog-tag">Travel Tips</span>
+                        </div>
+                        <div class="blog-actions">
+                            <a href="#" class="read-more">
+                                Read More
+                                <i class="fas fa-arrow-right"></i>
+                            </a>
+                            <div class="blog-stats">
+                                <div class="blog-stat">
+                                    <i class="far fa-eye"></i>
+                                    <span>1.2K</span>
+                                </div>
+                                <div class="blog-stat">
+                                    <i class="far fa-comment"></i>
+                                    <span>24</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Blog Post 2 -->
+                <article class="blog-card">
+                    <div class="blog-badge">Safety</div>
+                    <div class="blog-image">
+                        <img src="https://images.unsplash.com/photo-1569336415961-0d5ee6e16bfa?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" alt="Car Safety">
+                    </div>
+                    <div class="blog-content">
+                        <div class="blog-meta">
+                            <div class="blog-meta-item">
+                                <i class="far fa-calendar"></i>
+                                <span>March 12, 2024</span>
+                            </div>
+                            <div class="blog-meta-item">
+                                <i class="far fa-clock"></i>
+                                <span>4 min read</span>
+                            </div>
+                            <div class="blog-meta-item">
+                                <i class="far fa-user"></i>
+                                <span>By Safety Expert</span>
+                            </div>
+                        </div>
+                        <h3 class="blog-title">Top Safety Measures Every Cab Passenger Should Know</h3>
+                        <p class="blog-excerpt">Learn important safety protocols and precautions to ensure a secure and comfortable cab ride experience every time you travel.</p>
+                        <div class="blog-tags">
+                            <span class="blog-tag">Safety</span>
+                            <span class="blog-tag">Passenger Guide</span>
+                            <span class="blog-tag">Travel Security</span>
+                        </div>
+                        <div class="blog-actions">
+                            <a href="#" class="read-more">
+                                Read More
+                                <i class="fas fa-arrow-right"></i>
+                            </a>
+                            <div class="blog-stats">
+                                <div class="blog-stat">
+                                    <i class="far fa-eye"></i>
+                                    <span>956</span>
+                                </div>
+                                <div class="blog-stat">
+                                    <i class="far fa-comment"></i>
+                                    <span>18</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Blog Post 3 -->
+                <article class="blog-card">
+                    <div class="blog-badge">Destinations</div>
+                    <div class="blog-image">
+                        <img src="https://images.unsplash.com/photo-1464822759849-e30de5fe7b8a?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" alt="Mountain Destinations">
+                    </div>
+                    <div class="blog-content">
+                        <div class="blog-meta">
+                            <div class="blog-meta-item">
+                                <i class="far fa-calendar"></i>
+                                <span>March 8, 2024</span>
+                            </div>
+                            <div class="blog-meta-item">
+                                <i class="far fa-clock"></i>
+                                <span>7 min read</span>
+                            </div>
+                            <div class="blog-meta-item">
+                                <i class="far fa-user"></i>
+                                <span>By Travel Guide</span>
+                            </div>
+                        </div>
+                        <h3 class="blog-title">Hidden Gems: Offbeat Mountain Destinations in India</h3>
+                        <p class="blog-excerpt">Explore lesser-known mountain retreats that offer breathtaking views and peaceful escapes from crowded tourist spots.</p>
+                        <div class="blog-tags">
+                            <span class="blog-tag">Mountains</span>
+                            <span class="blog-tag">Destinations</span>
+                            <span class="blog-tag">Adventure</span>
+                        </div>
+                        <div class="blog-actions">
+                            <a href="#" class="read-more">
+                                Read More
+                                <i class="fas fa-arrow-right"></i>
+                            </a>
+                            <div class="blog-stats">
+                                <div class="blog-stat">
+                                    <i class="far fa-eye"></i>
+                                    <span>1.5K</span>
+                                </div>
+                                <div class="blog-stat">
+                                    <i class="far fa-comment"></i>
+                                    <span>32</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Blog Post 4 -->
+                <article class="blog-card">
+                    <div class="blog-badge">Seasonal</div>
+                    <div class="blog-image">
+                        <img src="https://images.unsplash.com/photo-1503220317375-aaad61436b1b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" alt="Summer Travel">
+                    </div>
+                    <div class="blog-content">
+                        <div class="blog-meta">
+                            <div class="blog-meta-item">
+                                <i class="far fa-calendar"></i>
+                                <span>March 5, 2024</span>
+                            </div>
+                            <div class="blog-meta-item">
+                                <i class="far fa-clock"></i>
+                                <span>6 min read</span>
+                            </div>
+                            <div class="blog-meta-item">
+                                <i class="far fa-user"></i>
+                                <span>By Travel Expert</span>
+                            </div>
+                        </div>
+                        <h3 class="blog-title">Best Summer Destinations to Beat the Heat in 2024</h3>
+                        <p class="blog-excerpt">Plan your summer getaway with our curated list of cool destinations perfect for escaping the scorching summer heat.</p>
+                        <div class="blog-tags">
+                            <span class="blog-tag">Summer</span>
+                            <span class="blog-tag">Seasonal</span>
+                            <span class="blog-tag">Destinations</span>
+                        </div>
+                        <div class="blog-actions">
+                            <a href="#" class="read-more">
+                                Read More
+                                <i class="fas fa-arrow-right"></i>
+                            </a>
+                            <div class="blog-stats">
+                                <div class="blog-stat">
+                                    <i class="far fa-eye"></i>
+                                    <span>2.1K</span>
+                                </div>
+                                <div class="blog-stat">
+                                    <i class="far fa-comment"></i>
+                                    <span>45</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Blog Post 5 -->
+                <article class="blog-card">
+                    <div class="blog-badge">Budget Travel</div>
+                    <div class="blog-image">
+                        <img src="https://images.unsplash.com/photo-1552733407-5d5c46c3bb3b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" alt="Budget Travel">
+                    </div>
+                    <div class="blog-content">
+                        <div class="blog-meta">
+                            <div class="blog-meta-item">
+                                <i class="far fa-calendar"></i>
+                                <span>March 1, 2024</span>
+                            </div>
+                            <div class="blog-meta-item">
+                                <i class="far fa-clock"></i>
+                                <span>8 min read</span>
+                            </div>
+                            <div class="blog-meta-item">
+                                <i class="far fa-user"></i>
+                                <span>By Budget Expert</span>
+                            </div>
+                        </div>
+                        <h3 class="blog-title">Smart Ways to Save Money on Your Next Cab Journey</h3>
+                        <p class="blog-excerpt">Discover practical tips and strategies to optimize your travel budget without compromising on comfort and safety.</p>
+                        <div class="blog-tags">
+                            <span class="blog-tag">Budget</span>
+                            <span class="blog-tag">Money Saving</span>
+                            <span class="blog-tag">Travel Hacks</span>
+                        </div>
+                        <div class="blog-actions">
+                            <a href="#" class="read-more">
+                                Read More
+                                <i class="fas fa-arrow-right"></i>
+                            </a>
+                            <div class="blog-stats">
+                                <div class="blog-stat">
+                                    <i class="far fa-eye"></i>
+                                    <span>3.2K</span>
+                                </div>
+                                <div class="blog-stat">
+                                    <i class="far fa-comment"></i>
+                                    <span>67</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Blog Post 6 -->
+                <article class="blog-card">
+                    <div class="blog-badge">Family Travel</div>
+                    <div class="blog-image">
+                        <img src="https://images.unsplash.com/photo-1570077188670-e3a8d69ac5ff?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" alt="Family Travel">
+                    </div>
+                    <div class="blog-content">
+                        <div class="blog-meta">
+                            <div class="blog-meta-item">
+                                <i class="far fa-calendar"></i>
+                                <span>February 25, 2024</span>
+                            </div>
+                            <div class="blog-meta-item">
+                                <i class="far fa-clock"></i>
+                                <span>5 min read</span>
+                            </div>
+                            <div class="blog-meta-item">
+                                <i class="far fa-user"></i>
+                                <span>By Family Guide</span>
+                            </div>
+                        </div>
+                        <h3 class="blog-title">Family Road Trips: Making Travel Fun for Everyone</h3>
+                        <p class="blog-excerpt">Essential tips for planning family-friendly road trips that keep children engaged and everyone happy throughout the journey.</p>
+                        <div class="blog-tags">
+                            <span class="blog-tag">Family</span>
+                            <span class="blog-tag">Kids</span>
+                            <span class="blog-tag">Road Trip</span>
+                        </div>
+                        <div class="blog-actions">
+                            <a href="#" class="read-more">
+                                Read More
+                                <i class="fas fa-arrow-right"></i>
+                            </a>
+                            <div class="blog-stats">
+                                <div class="blog-stat">
+                                    <i class="far fa-eye"></i>
+                                    <span>1.8K</span>
+                                </div>
+                                <div class="blog-stat">
+                                    <i class="far fa-comment"></i>
+                                    <span>29</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+            </div>
+
+            <div class="blog-cta">
+                <div class="cta-content">
+                    <h3 class="cta-title">Stay Updated with Travel Insights</h3>
+                    <p class="cta-text">Subscribe to our newsletter and receive the latest travel tips, destination guides, and exclusive offers directly in your inbox.</p>
+                    <form class="subscribe-form">
+                        <input type="email" class="subscribe-input" placeholder="Enter your email address" required>
+                        <button type="submit" class="subscribe-btn">
+                            <i class="fas fa-paper-plane"></i>
+                            Subscribe
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Blog functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            // Read More button functionality
+            document.querySelectorAll('.read-more').forEach(button => {
+                button.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const blogTitle = this.closest('.blog-card').querySelector('.blog-title').textContent;
+                    alert(`You clicked to read more about: "${blogTitle}"\n\nThis would typically open a full blog post page.`);
+                });
+            });
+
+            // Subscribe form functionality
+            document.querySelector('.subscribe-form').addEventListener('submit', function(e) {
+                e.preventDefault();
+                const email = this.querySelector('.subscribe-input').value;
+                if (email) {
+                    alert(`Thank you for subscribing with: ${email}\nYou'll receive our latest travel insights soon!`);
+                    this.reset();
+                }
+            });
+
+            // Blog tag interaction
+            document.querySelectorAll('.blog-tag').forEach(tag => {
+                tag.addEventListener('click', function() {
+                    const tagText = this.textContent;
+                    alert(`Showing all blog posts tagged: ${tagText}`);
+                });
+            });
+        });
+    </script>
+</body>
+</html>
